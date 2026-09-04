@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from backend.app.core.config import config, setup_logging, get_logger
+from app.core.config import config, setup_logging, get_logger
 from contextlib import asynccontextmanager
 
 setup_logging()
