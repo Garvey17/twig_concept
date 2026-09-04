@@ -1,12 +1,26 @@
-from pydantic_settings import  BaseSettings
+from pydantic_settings import  BaseSettings, SettingsConfigDict
+from pathlib import Path
 import logging
 
-class config(BaseSettings):
+class Setings(BaseSettings):
     openai_api_key: str
+    openai_model: str
+    embedding_model: str
+    github_webhook_secret: str
+    github_app_id: str
+    github_private_key_path: str
+    qdrant_url: str
+    qdrant_api_key: str
 
-    class Config:
-        env_file = ".env"
 
+    model_config = SettingsConfigDict(env_file=".env")
+
+    @property
+    def github_private_key(self) -> str:
+        """Reads the private key path and returns the path"""
+        return Path(self.github_private_key_path).read_text
+
+settings = Setings()
 
 def setup_logging() ->  None:
     """Basic standard logging configuration"""
@@ -19,7 +33,7 @@ def setup_logging() ->  None:
     #Reduce noise from chatty libraries
     logging.getLogger("httpx").setLevel(logging.WARNING)
     logging.getLogger("httpcore").setLevel(logging.WARNING)
-    logging.getLogger("google").setLevel(logging.WARNING)
+    # logging.getLogger("google").setLevel(logging.WARNING)
 
 def get_logger(name: str) -> logging.Logger:
     """Retrieve logger"""
