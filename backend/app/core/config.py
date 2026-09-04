@@ -7,10 +7,11 @@ class Setings(BaseSettings):
     openai_model: str
     embedding_model: str
     github_webhook_secret: str
-    github_app_id: str
+    github_app_id: int
     github_private_key_path: str
     qdrant_url: str
     qdrant_api_key: str
+    qdrant_collection_name: str
 
 
     model_config = SettingsConfigDict(env_file=".env")

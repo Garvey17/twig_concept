@@ -8,6 +8,8 @@ logger = get_logger(__name__)
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     logger.info('Starting app...')
+    logger.info(f"OpenAI model: {settings.openai_model}")
+    logger.info(f"Qdrant collection: {settings.qdrant_collection_name}")
     yield
     logger.info("Stopping app ...")
 
