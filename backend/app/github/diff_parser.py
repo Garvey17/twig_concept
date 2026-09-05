@@ -1,4 +1,18 @@
 
+from pydantic import BaseModel
+from typing import Literal
+
+
+class HunkLine(BaseModel):
+    line_number: int
+    content: str
+    type: Literal["addition", "context"]
+
+
+class FileChange(BaseModel):
+    filename: str
+    hunks: list[HunkLine]
+
 to_be_excluded = [
     ".lock", "package-lock.json", "yarn.lock", "poetry.lock",
     ".min.js", ".min.css",
