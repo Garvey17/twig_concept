@@ -143,3 +143,6 @@ yarn-error.log*
 scratch/
 notes.md
 TODO.local.md
+
+### test scripts
+parse_test.py
